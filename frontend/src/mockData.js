@@ -54,17 +54,20 @@ export const portfolioData = {
   experience: [
     {
       id: 1,
-      title: "Business Process Associate - Care Representative",
+      title: "Business Process Associate - Care Representative and Upskill into Automation Specialist",
       company: "Tata Consultancy Services",
       client: "AGL Retailer AU",
       period: "March 2023 - April 2026",
-      description: "Delivered exceptional customer service for energy and telecommunications services",
+      description: "Delivered exceptional customer service for energy and telecommunications services while upskilling into AI automation specialist",
       responsibilities: [
         "Assisted customers with billing inquiries, bill shock concerns, payments, refunds, and account management",
         "Processed gas, electricity, internet and mobile connection, disconnection, and transfer requests",
         "Coordinated with distributors and internal departments to resolve service and account-related issues",
         "Escalated complex cases to management and specialized teams for resolution",
-        "Provided accurate information regarding energy services while delivering excellent customer service"
+        "Provided accurate information regarding energy services while delivering excellent customer service",
+        "Implemented AI automation for QA processes to enhance quality control and operational efficiency",
+        "Leveraged TCS AI Wisdom Next platform for intelligent process automation and data-driven insights",
+        "Developed automated workflows to streamline repetitive tasks and improve team productivity"
       ]
     },
     {

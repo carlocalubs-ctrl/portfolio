@@ -34,19 +34,42 @@ export const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await axios.post(`${API}/contact`, formData);
+      const response = await axios.post(`${API}/contact`, formData, {
+        headers: { 'Content-Type': 'application/json' },
+        timeout: 15000
+      });
       
-      if (response.data.success) {
+      if (response.data && response.data.success) {
         setIsSubmitted(true);
-        toast.success(response.data.message);
+        toast.success(response.data.message || 'Message sent successfully!');
         setTimeout(() => {
           setFormData({ name: '', email: '', subject: '', message: '' });
           setIsSubmitted(false);
         }, 3000);
+      } else {
+        toast.error('Unexpected response. Please try again.');
       }
     } catch (error) {
       console.error('Contact form error:', error);
-      toast.error('Failed to send message. Please try again.');
+      
+      let errorMsg = 'Failed to send message. Please try again.';
+      if (error.response) {
+        // Server responded with error
+        if (error.response.data && error.response.data.detail) {
+          if (Array.isArray(error.response.data.detail)) {
+            // Validation errors from FastAPI
+            const firstErr = error.response.data.detail[0];
+            errorMsg = firstErr.msg || errorMsg;
+          } else {
+            errorMsg = error.response.data.detail;
+          }
+        }
+      } else if (error.request) {
+        // Request made but no response
+        errorMsg = 'Network error. Please check your connection.';
+      }
+      
+      toast.error(errorMsg);
     } finally {
       setIsSubmitting(false);
     }
