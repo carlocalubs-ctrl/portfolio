@@ -32,7 +32,7 @@ export const Header = () => {
               onClick={() => scrollToSection('hero')}
               className="text-xl font-bold bg-gradient-to-r from-teal-400 to-emerald-400 bg-clip-text text-transparent hover:from-teal-300 hover:to-emerald-300 transition-all duration-300"
             >
-              John Carlo Calubiran
+              John Carlo R. Calubiran
             </button>
           </div>
 

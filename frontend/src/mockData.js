@@ -2,16 +2,17 @@
 
 export const portfolioData = {
   // Personal Info
-  name: "John Carlo Calubiran",
+  name: "John Carlo R. Calubiran",
   title: "Automation Specialist",
   tagline: "Transforming Business Operations Through Intelligent Automation",
   email: "carlocalubs@gmail.com",
   phone: "+639565229350",
   linkedin: "", // To be added later
+  profileImage: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/tafkpjz1_wmremove-transformed.png",
   
   // Hero Section
   hero: {
-    title: "John Carlo Calubiran",
+    title: "John Carlo R. Calubiran",
     subtitle: "Automation Specialist",
     description: "Empowering businesses with AI-driven automation solutions, seamless API integrations, and customer service excellence.",
   },
