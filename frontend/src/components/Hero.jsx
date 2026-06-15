@@ -1,5 +1,5 @@
 import { Button } from './ui/button';
-import { ArrowRight, Download } from 'lucide-react';
+import { ArrowRight, Download, Zap, Bot } from 'lucide-react';
 import { portfolioData } from '../mockData';
 
 export const Hero = () => {
@@ -96,19 +96,32 @@ export const Hero = () => {
 
             {/* Right Column - Profile Image */}
             <div className="flex justify-center lg:justify-end">
-              <div className="relative group">
-                {/* Glow Effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-2xl blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+              <div className="relative group animate-float">
+                {/* Animated Glow Effect */}
+                <div className="absolute -inset-2 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-2xl blur-2xl animate-pulse-glow"></div>
+                
+                {/* Rotating Border Effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400 rounded-2xl opacity-75 group-hover:opacity-100 transition-opacity duration-300" style={{ background: 'conic-gradient(from 0deg, #14b8a6, #10b981, #06b6d4, #14b8a6)', animation: 'spin 4s linear infinite' }}></div>
                 
                 {/* Image Container */}
-                <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden border-2 border-slate-700 group-hover:border-teal-500/50 transition-all duration-300">
+                <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden border-2 border-slate-700 hover-rotate animate-scale-in bg-slate-900">
                   <img
                     src={profileImage}
                     alt="John Carlo R. Calubiran"
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                   />
                   {/* Overlay Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+
+                {/* Floating Badge - Top */}
+                <div className="absolute -top-4 -right-4 bg-gradient-to-r from-teal-500 to-emerald-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg animate-bounce flex items-center gap-1" style={{ animationDuration: '3s' }}>
+                  <Zap className="w-4 h-4" /> Automation Expert
+                </div>
+
+                {/* Floating Badge - Bottom */}
+                <div className="absolute -bottom-4 -left-4 bg-slate-800 border border-teal-500/30 text-teal-400 px-4 py-2 rounded-full text-sm font-semibold shadow-lg animate-float flex items-center gap-1" style={{ animationDuration: '4s', animationDelay: '1s' }}>
+                  <Bot className="w-4 h-4" /> AI Specialist
                 </div>
               </div>
             </div>
