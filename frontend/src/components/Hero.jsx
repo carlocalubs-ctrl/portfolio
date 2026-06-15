@@ -94,39 +94,25 @@ export const Hero = () => {
               </div>
             </div>
 
-            {/* Right Column - Profile Image */}
+            {/* Right Column - Profile Video */}
             <div className="flex justify-center lg:justify-end">
-              <div className="relative group animate-float">
-                {/* Animated Glow Effect */}
-                <div className="absolute -inset-2 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-2xl blur-2xl animate-pulse-glow"></div>
-                
-                {/* Rotating Border Effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400 rounded-2xl opacity-75 group-hover:opacity-100 transition-opacity duration-300" style={{ background: 'conic-gradient(from 0deg, #14b8a6, #10b981, #06b6d4, #14b8a6)', animation: 'spin 4s linear infinite' }}></div>
-                
-                {/* Image Container */}
-                <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden border-2 border-slate-700 hover-rotate animate-scale-in bg-slate-900">
-                  <video
-                    src={profileVideo}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover"
-                    style={{ mixBlendMode: 'lighten' }}
-                  />
-                  {/* Overlay Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                </div>
+              <div className="relative animate-float">
+                {/* Soft Glow Behind Video */}
+                <div className="absolute inset-0 bg-gradient-to-r from-teal-500/20 via-emerald-500/20 to-cyan-500/20 blur-3xl animate-pulse-glow"></div>
 
-                {/* Floating Badge - Top */}
-                <div className="absolute -top-4 -right-4 bg-gradient-to-r from-teal-500 to-emerald-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg animate-bounce flex items-center gap-1" style={{ animationDuration: '3s' }}>
-                  <Zap className="w-4 h-4" /> Automation Expert
-                </div>
-
-                {/* Floating Badge - Bottom */}
-                <div className="absolute -bottom-4 -left-4 bg-slate-800 border border-teal-500/30 text-teal-400 px-4 py-2 rounded-full text-sm font-semibold shadow-lg animate-float flex items-center gap-1" style={{ animationDuration: '4s', animationDelay: '1s' }}>
-                  <Bot className="w-4 h-4" /> AI Specialist
-                </div>
+                {/* Video - No box, just floating */}
+                <video
+                  src={profileVideo}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[28rem] lg:h-[28rem] object-contain animate-scale-in"
+                  style={{ 
+                    mixBlendMode: 'screen',
+                    filter: 'contrast(1.15) brightness(1.05) saturate(1.1)'
+                  }}
+                />
               </div>
             </div>
           </div>
