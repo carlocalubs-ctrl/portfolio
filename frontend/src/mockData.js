@@ -9,7 +9,7 @@ export const portfolioData = {
   phone: "+639565229350",
   linkedin: "", // To be added later
   profileImage: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/tafkpjz1_wmremove-transformed.png",
-  profileVideo: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/5jtp7pfj_VID_20260615_163231.mp4",
+  profileVideo: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/yp069pbn_download%20%282%29.mp4",
   
   // Hero Section
   hero: {
