@@ -3,7 +3,7 @@ import { ArrowRight, Download, Zap, Bot } from 'lucide-react';
 import { portfolioData } from '../mockData';
 
 export const Hero = () => {
-  const { hero, profileImage } = portfolioData;
+  const { hero, profileVideo } = portfolioData;
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -105,13 +105,17 @@ export const Hero = () => {
                 
                 {/* Image Container */}
                 <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden border-2 border-slate-700 hover-rotate animate-scale-in bg-slate-900">
-                  <img
-                    src={profileImage}
-                    alt="John Carlo R. Calubiran"
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                  <video
+                    src={profileVideo}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                    style={{ mixBlendMode: 'lighten' }}
                   />
                   {/* Overlay Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                 </div>
 
                 {/* Floating Badge - Top */}
