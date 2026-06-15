@@ -6,6 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from './ui/
 import { Mail, Phone, Linkedin, Send, CheckCircle2 } from 'lucide-react';
 import { portfolioData } from '../mockData';
 import { toast } from 'sonner';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 export const Contact = () => {
   const { email, phone, linkedin } = portfolioData;
@@ -16,6 +20,7 @@ export const Contact = () => {
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -24,16 +29,27 @@ export const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Mock submission - will be replaced with backend API
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    toast.success('Message sent successfully! I will get back to you soon.');
-    setTimeout(() => {
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setIsSubmitted(false);
-    }, 3000);
+    setIsSubmitting(true);
+    
+    try {
+      const response = await axios.post(`${API}/contact`, formData);
+      
+      if (response.data.success) {
+        setIsSubmitted(true);
+        toast.success(response.data.message);
+        setTimeout(() => {
+          setFormData({ name: '', email: '', subject: '', message: '' });
+          setIsSubmitted(false);
+        }, 3000);
+      }
+    } catch (error) {
+      console.error('Contact form error:', error);
+      toast.error('Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -192,9 +208,10 @@ export const Contact = () => {
 
                       <Button
                         type="submit"
-                        className="w-full bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-medium py-6 group"
+                        disabled={isSubmitting}
+                        className="w-full bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-medium py-6 group disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Send Message
+                        {isSubmitting ? 'Sending...' : 'Send Message'}
                         <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </form>
