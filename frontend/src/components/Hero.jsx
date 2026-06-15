@@ -96,23 +96,47 @@ export const Hero = () => {
 
             {/* Right Column - Profile Video */}
             <div className="flex justify-center lg:justify-end">
-              <div className="relative animate-float">
+              <div className="relative animate-float cursor-hover-target">
                 {/* Soft Glow Behind Video */}
-                <div className="absolute inset-0 bg-gradient-to-r from-teal-500/20 via-emerald-500/20 to-cyan-500/20 blur-3xl animate-pulse-glow"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-teal-500/20 via-emerald-500/20 to-cyan-500/20 blur-3xl animate-pulse-glow rounded-full"></div>
 
-                {/* Video - No box, just floating */}
-                <video
-                  src={profileVideo}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[28rem] lg:h-[28rem] object-contain animate-scale-in"
-                  style={{ 
-                    mixBlendMode: 'screen',
-                    filter: 'contrast(1.15) brightness(1.05) saturate(1.1)'
-                  }}
-                />
+                {/* Circular Container with Animated Border */}
+                <div className="relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[28rem] lg:h-[28rem]">
+                  {/* Animated Gradient Border */}
+                  <div className="profile-border-glow"></div>
+                  
+                  {/* Inner ring spacer */}
+                  <div className="absolute inset-0 rounded-full bg-slate-900 z-0"></div>
+                  
+                  {/* Video Container - Circular with fit border */}
+                  <div className="absolute inset-[6px] rounded-full overflow-hidden bg-slate-900 z-10 border-2 border-slate-800/50">
+                    <video
+                      src={profileVideo}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover animate-scale-in"
+                      style={{ 
+                        mixBlendMode: 'screen',
+                        filter: 'contrast(1.15) brightness(1.05) saturate(1.1)'
+                      }}
+                    />
+                  </div>
+
+                  {/* Decorative Rotating Ring */}
+                  <div className="absolute -inset-4 rounded-full border-2 border-dashed border-teal-500/20 animate-spin" style={{ animationDuration: '20s' }}></div>
+                </div>
+
+                {/* Floating Badge - Top */}
+                <div className="absolute top-4 -right-2 sm:-right-6 bg-gradient-to-r from-teal-500 to-emerald-500 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg animate-bounce flex items-center gap-1 z-20" style={{ animationDuration: '3s' }}>
+                  <Zap className="w-3 h-3" /> Automation Expert
+                </div>
+
+                {/* Floating Badge - Bottom */}
+                <div className="absolute bottom-4 -left-2 sm:-left-6 bg-slate-800 border border-teal-500/30 text-teal-400 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg animate-float flex items-center gap-1 z-20" style={{ animationDuration: '4s', animationDelay: '1s' }}>
+                  <Bot className="w-3 h-3" /> AI Specialist
+                </div>
               </div>
             </div>
           </div>

@@ -3,6 +3,167 @@ html {
     scroll-behavior: smooth;
 }
 
+body {
+    cursor: none;
+}
+
+/* Restore default cursor on mobile */
+@media (max-width: 768px) {
+    body {
+        cursor: auto;
+    }
+    .custom-cursor,
+    .custom-cursor-dot {
+        display: none !important;
+    }
+}
+
+/* Custom Cursor */
+.custom-cursor {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(20, 184, 166, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease-out, width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+}
+
+.custom-cursor-dot {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background-color: #14b8a6;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: transform 0.05s ease-out;
+}
+
+.custom-cursor.cursor-hover {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(20, 184, 166, 0.15);
+    border-color: rgba(16, 185, 129, 0.8);
+}
+
+.custom-cursor.cursor-click {
+    transform: translate(-50%, -50%) scale(0.8);
+}
+
+/* Animated background grid */
+.animated-grid-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(20, 184, 166, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20, 184, 166, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 50px 50px;
+    }
+}
+
+/* Floating particles background */
+.particles-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(20, 184, 166, 0.6) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(100vh) translateX(0) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(90vh) translateX(0) scale(1);
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh) translateX(100px) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Moving gradient orbs */
+.gradient-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.3;
+    animation: orbFloat 25s ease-in-out infinite;
+}
+
+.gradient-orb-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #14b8a6, transparent);
+    top: -100px;
+    left: -100px;
+    animation-delay: 0s;
+}
+
+.gradient-orb-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #10b981, transparent);
+    top: 40%;
+    right: -150px;
+    animation-delay: -8s;
+}
+
+.gradient-orb-3 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, #06b6d4, transparent);
+    bottom: -100px;
+    left: 30%;
+    animation-delay: -16s;
+}
+
+@keyframes orbFloat {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(100px, -50px) scale(1.1);
+    }
+    50% {
+        transform: translate(-50px, 100px) scale(0.9);
+    }
+    75% {
+        transform: translate(-100px, -100px) scale(1.05);
+    }
+}
+
 /* Animated blob effect */
 @keyframes blob {
     0% {
@@ -75,13 +236,39 @@ html {
     animation: scaleIn 0.8s ease-out;
 }
 
-/* Rotate on hover */
-.hover-rotate {
-    transition: transform 0.6s ease;
+/* Profile picture border animation */
+@keyframes borderRotate {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
-.hover-rotate:hover {
-    transform: rotate(2deg) scale(1.05);
+.profile-border-glow {
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: linear-gradient(
+        45deg,
+        #14b8a6,
+        #10b981,
+        #06b6d4,
+        #14b8a6,
+        #10b981
+    );
+    background-size: 300% 300%;
+    animation: borderRotate 6s ease infinite;
+    z-index: -1;
+}
+
+/* Hide cursor on interactive elements - we have custom one */
+a, button, input, textarea, select {
+    cursor: none;
 }
 
 /* Custom scrollbar */
@@ -94,15 +281,22 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #334155;
+    background: linear-gradient(to bottom, #14b8a6, #10b981);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #475569;
+    background: linear-gradient(to bottom, #0d9488, #059669);
 }
 
 /* Remove default App styles that might interfere */
 .App {
     min-height: 100vh;
+    position: relative;
+}
+
+/* Selection color */
+::selection {
+    background-color: rgba(20, 184, 166, 0.3);
+    color: #ffffff;
 }
