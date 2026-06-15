@@ -29,8 +29,43 @@ export const Contact = () => {
     });
   };
 
+  const validateForm = () => {
+    if (!formData.name.trim()) {
+      return 'Please enter your name';
+    }
+    if (!formData.email.trim()) {
+      return 'Please enter your email address';
+    }
+    // Basic email regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email.trim())) {
+      return 'Please enter a valid email address (e.g., name@example.com)';
+    }
+    if (!formData.subject.trim()) {
+      return 'Please enter a subject';
+    }
+    if (!formData.message.trim()) {
+      return 'Please enter your message';
+    }
+    if (formData.message.trim().length < 10) {
+      return `Your message is too short. Please write at least 10 characters (currently ${formData.message.trim().length}).`;
+    }
+    if (formData.message.trim().length > 2000) {
+      return 'Your message is too long. Please keep it under 2000 characters.';
+    }
+    return null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Client-side validation first
+    const validationError = validateForm();
+    if (validationError) {
+      toast.error(validationError);
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
@@ -47,26 +82,34 @@ export const Contact = () => {
           setIsSubmitted(false);
         }, 3000);
       } else {
-        toast.error('Unexpected response. Please try again.');
+        toast.error('Unexpected response from server. Please try again.');
       }
     } catch (error) {
       console.error('Contact form error:', error);
       
-      let errorMsg = 'Failed to send message. Please try again.';
-      if (error.response) {
-        // Server responded with error
-        if (error.response.data && error.response.data.detail) {
-          if (Array.isArray(error.response.data.detail)) {
-            // Validation errors from FastAPI
-            const firstErr = error.response.data.detail[0];
-            errorMsg = firstErr.msg || errorMsg;
-          } else {
-            errorMsg = error.response.data.detail;
-          }
+      let errorMsg = 'Could not send your message. Please try again in a moment.';
+      
+      if (error.code === 'ECONNABORTED') {
+        errorMsg = 'Request timed out. Please check your internet connection and try again.';
+      } else if (error.response) {
+        // Server responded with error status
+        const status = error.response.status;
+        const detail = error.response.data?.detail;
+        
+        if (status === 422 && Array.isArray(detail)) {
+          // FastAPI validation errors
+          const firstErr = detail[0];
+          const field = firstErr.loc?.[firstErr.loc.length - 1] || 'field';
+          errorMsg = `${field}: ${firstErr.msg}`;
+        } else if (typeof detail === 'string') {
+          errorMsg = detail;
+        } else if (status === 429) {
+          errorMsg = 'Too many requests. Please wait a moment and try again.';
+        } else if (status >= 500) {
+          errorMsg = 'Server error. Please try again later.';
         }
       } else if (error.request) {
-        // Request made but no response
-        errorMsg = 'Network error. Please check your connection.';
+        errorMsg = 'Cannot reach the server. Please check your internet connection.';
       }
       
       toast.error(errorMsg);
@@ -215,16 +258,22 @@ export const Contact = () => {
                       </div>
 
                       <div>
-                        <label className="text-sm font-medium text-slate-300 mb-2 block">
-                          Message *
-                        </label>
+                        <div className="flex items-center justify-between mb-2">
+                          <label className="text-sm font-medium text-slate-300">
+                            Message *
+                          </label>
+                          <span className={`text-xs ${formData.message.trim().length < 10 ? 'text-amber-400' : 'text-slate-500'}`}>
+                            {formData.message.trim().length}/2000 {formData.message.trim().length < 10 && `(min 10)`}
+                          </span>
+                        </div>
                         <Textarea
                           name="message"
                           value={formData.message}
                           onChange={handleChange}
                           required
                           rows={5}
-                          placeholder="Tell me about your project or inquiry..."
+                          maxLength={2000}
+                          placeholder="Tell me about your project or inquiry... (minimum 10 characters)"
                           className="bg-slate-900 border-slate-700 text-white placeholder:text-slate-500 focus:border-teal-500 resize-none"
                         />
                       </div>
