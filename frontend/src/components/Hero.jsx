@@ -33,7 +33,7 @@ export const Hero = () => {
             {/* Left Column - Text Content */}
             <div className="text-center lg:text-left">
               {/* Main Title */}
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-[1.05] tracking-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-[1.05] tracking-tight">
                 <span className="bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
                   John Carlo R.
                 </span>
@@ -44,8 +44,7 @@ export const Hero = () => {
               </h1>
 
               {/* Subtitle */}
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 flex items-center justify-center lg:justify-start gap-2">
-                <span className="inline-block w-8 h-[2px] bg-teal-400"></span>
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6">
                 <span className="bg-gradient-to-r from-teal-400 to-emerald-400 bg-clip-text text-transparent">
                   {hero.subtitle}
                 </span>
