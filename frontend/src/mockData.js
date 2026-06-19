@@ -144,6 +144,16 @@ export const portfolioData = {
       image: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/oormgy3h_zapier.jpg",
       video: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/5plpsdy1_zapier.mp4",
       status: "live"
+    },
+    {
+      id: 4,
+      title: "Asana & Xero Task-to-Invoice Sync Automation",
+      description: "Make.com workflow that watches completed Asana tasks, makes API calls to Xero for invoice data, routes through an iterator and router, syncs data to Google Sheets, creates CSV reports, and uploads attachments back to Asana — fully automating the task-to-invoice reporting cycle.",
+      category: "Make Automation",
+      technologies: ["Make.com", "Asana", "Xero", "Google Sheets", "CSV Processing"],
+      image: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/9dmjedly_1.%20PROJECT%20SCREENSHOT.jpg",
+      video: null,
+      status: "live"
     }
   ],
 
