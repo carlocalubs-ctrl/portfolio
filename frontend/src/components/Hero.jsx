@@ -33,14 +33,19 @@ export const Hero = () => {
             {/* Left Column - Text Content */}
             <div className="text-center lg:text-left">
               {/* Main Title */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
-                  {hero.title}
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-[1.05] tracking-tight">
+                <span className="bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+                  John Carlo R.
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-teal-300 via-emerald-300 to-cyan-300 bg-clip-text text-transparent">
+                  Calubiran
                 </span>
               </h1>
 
               {/* Subtitle */}
-              <div className="text-2xl sm:text-3xl font-semibold mb-6">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 flex items-center justify-center lg:justify-start gap-2">
+                <span className="inline-block w-8 h-[2px] bg-teal-400"></span>
                 <span className="bg-gradient-to-r from-teal-400 to-emerald-400 bg-clip-text text-transparent">
                   {hero.subtitle}
                 </span>
@@ -95,7 +100,7 @@ export const Hero = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-teal-500/20 via-emerald-500/20 to-cyan-500/20 blur-3xl animate-pulse-glow rounded-3xl"></div>
 
                 {/* Rounded Square Container with Animated Border */}
-                <div className="relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[28rem] lg:h-[28rem]">
+                <div className="relative w-[22rem] h-[22rem] sm:w-[26rem] sm:h-[26rem] lg:w-[32rem] lg:h-[32rem]">
                   {/* Animated Gradient Border (rounded square) */}
                   <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 bg-[length:300%_300%]" style={{ animation: 'borderRotate 6s ease infinite' }}></div>
                   
