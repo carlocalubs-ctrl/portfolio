@@ -100,7 +100,7 @@ export const Hero = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-teal-500/20 via-emerald-500/20 to-cyan-500/20 blur-3xl animate-pulse-glow rounded-3xl"></div>
 
                 {/* Rounded Square Container with Animated Border */}
-                <div className="relative w-[22rem] h-[22rem] sm:w-[26rem] sm:h-[26rem] lg:w-[32rem] lg:h-[32rem]">
+                <div className="relative w-[24rem] h-[24rem] sm:w-[30rem] sm:h-[30rem] lg:w-[38rem] lg:h-[38rem]">
                   {/* Animated Gradient Border (rounded square) */}
                   <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 bg-[length:300%_300%]" style={{ animation: 'borderRotate 6s ease infinite' }}></div>
                   
