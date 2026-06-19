@@ -1,6 +1,7 @@
 import { Card, CardContent } from './ui/card';
 import { Star, Quote } from 'lucide-react';
 import { portfolioData } from '../mockData';
+import { ScrollReveal } from '../hooks/useScrollReveal';
 
 export const Testimonials = () => {
   const { testimonials } = portfolioData;
@@ -11,20 +12,23 @@ export const Testimonials = () => {
     <section id="testimonials" className="relative py-20 bg-slate-950/60 backdrop-blur-[2px]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
-              Client Testimonials
-            </span>
-          </h2>
-          <p className="text-lg text-slate-400">
-            What clients say about working with me
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+                Client Testimonials
+              </span>
+            </h2>
+            <p className="text-lg text-slate-400">
+              What clients say about working with me
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* Featured Testimonial */}
         {featured && (
-          <div className="max-w-6xl mx-auto mb-12">
+          <ScrollReveal>
+            <div className="max-w-6xl mx-auto mb-12">
             <Card
               data-testid="testimonial-featured-card"
               className="overflow-hidden bg-slate-800/50 border-slate-700 hover:border-teal-500/50 transition-all duration-300 backdrop-blur-sm"
@@ -90,16 +94,17 @@ export const Testimonials = () => {
               </div>
             </Card>
           </div>
+          </ScrollReveal>
         )}
 
         {/* Regular Testimonials Grid */}
         {regular.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {regular.map((testimonial) => (
+            {regular.map((testimonial, idx) => (
+              <ScrollReveal key={testimonial.id} delay={idx * 100}>
               <Card
-                key={testimonial.id}
                 data-testid={`testimonial-card-${testimonial.id}`}
-                className="bg-slate-800/50 border-slate-700 hover:border-teal-500/50 transition-all duration-300 backdrop-blur-sm group"
+                className="bg-slate-800/50 border-slate-700 hover:border-teal-500/50 transition-all duration-300 backdrop-blur-sm group h-full"
               >
                 <CardContent className="pt-6">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500/20 to-emerald-500/20 flex items-center justify-center mb-4 group-hover:from-teal-500/30 group-hover:to-emerald-500/30 transition-all">
@@ -131,6 +136,7 @@ export const Testimonials = () => {
                   </div>
                 </CardContent>
               </Card>
+              </ScrollReveal>
             ))}
           </div>
         )}

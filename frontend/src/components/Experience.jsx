@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Badge } from './ui/badge';
 import { Briefcase, Calendar, MapPin, ChevronDown, Sparkles, Building2 } from 'lucide-react';
 import { portfolioData } from '../mockData';
+import { ScrollReveal } from '../hooks/useScrollReveal';
 
 export const Experience = () => {
   const { experience } = portfolioData;
@@ -17,7 +18,8 @@ export const Experience = () => {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-4xl mx-auto mb-16">
+        <ScrollReveal>
+          <div className="max-w-4xl mx-auto mb-16">
           <div className="flex items-center gap-3 mb-4 justify-center">
             <span className="inline-block w-8 h-[2px] bg-teal-400"></span>
             <span className="text-teal-400 text-sm font-semibold uppercase tracking-widest">
@@ -36,7 +38,8 @@ export const Experience = () => {
           <p className="text-lg text-slate-400 text-center max-w-2xl mx-auto">
             A proven track record across customer service, business process, and AI automation
           </p>
-        </div>
+          </div>
+        </ScrollReveal>
 
         {/* Experience Cards - Vertical stacked with vertical timeline rail */}
         <div className="max-w-5xl mx-auto relative">
@@ -49,8 +52,8 @@ export const Experience = () => {
               const current = isCurrentRole(job.period);
 
               return (
+                <ScrollReveal key={job.id} delay={index * 100}>
                 <div
-                  key={job.id}
                   data-testid={`experience-card-${job.id}`}
                   className="relative sm:pl-20"
                 >
@@ -200,13 +203,15 @@ export const Experience = () => {
                     </div>
                   </div>
                 </div>
+                </ScrollReveal>
               );
             })}
           </div>
         </div>
 
         {/* Bottom stats / accent */}
-        <div className="max-w-3xl mx-auto mt-16 grid grid-cols-3 gap-4 pt-8 border-t border-slate-800">
+        <ScrollReveal delay={200}>
+          <div className="max-w-3xl mx-auto mt-16 grid grid-cols-3 gap-4 pt-8 border-t border-slate-800">
           <div className="text-center">
             <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-br from-teal-300 to-emerald-400 bg-clip-text text-transparent">
               {experience.length}+
@@ -226,6 +231,7 @@ export const Experience = () => {
             <div className="text-xs sm:text-sm text-slate-400 mt-1">Industries</div>
           </div>
         </div>
+        </ScrollReveal>
       </div>
     </section>
   );

@@ -3,16 +3,18 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from './ui/card';
-import { Mail, Phone, Linkedin, Send, CheckCircle2 } from 'lucide-react';
+import { Mail, Phone, Linkedin, Send, CheckCircle2, Calendar, MessageSquare, Video, Clock, ArrowUpRight } from 'lucide-react';
 import { portfolioData } from '../mockData';
 import { toast } from 'sonner';
 import axios from 'axios';
+import { ScrollReveal } from '../hooks/useScrollReveal';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 export const Contact = () => {
-  const { email, phone, linkedin } = portfolioData;
+  const { email, phone, linkedin, calendly } = portfolioData;
+  const [activeTab, setActiveTab] = useState('message'); // 'message' | 'call'
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -122,20 +124,23 @@ export const Contact = () => {
     <section id="contact" className="relative py-20 bg-slate-900/60 backdrop-blur-[2px]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
-              Get In Touch
-            </span>
-          </h2>
-          <p className="text-lg text-slate-400">
-            Let's discuss how I can help automate and optimize your business processes
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+                Get In Touch
+              </span>
+            </h2>
+            <p className="text-lg text-slate-400">
+              Let's discuss how I can help automate and optimize your business processes
+            </p>
+          </div>
+        </ScrollReveal>
 
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Contact Info */}
+            <ScrollReveal direction="right" delay={100}>
             <div className="space-y-6">
               <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
                 <CardHeader>
@@ -190,107 +195,213 @@ export const Contact = () => {
                 </CardContent>
               </Card>
             </div>
+            </ScrollReveal>
 
-            {/* Contact Form */}
+            {/* Contact Form / Booking Tabs */}
+            <ScrollReveal direction="left" delay={200}>
             <div className="lg:col-span-2">
-              <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="text-white">Send a Message</CardTitle>
-                  <CardDescription className="text-slate-400">
-                    Fill out the form and I'll get back to you within 24 hours
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {isSubmitted ? (
-                    <div className="py-12 text-center">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-teal-500/20 to-emerald-500/20 flex items-center justify-center mx-auto mb-4">
-                        <CheckCircle2 className="w-8 h-8 text-teal-400" />
-                      </div>
-                      <h3 className="text-xl font-semibold text-white mb-2">Message Sent!</h3>
-                      <p className="text-slate-400">Thank you for reaching out. I'll respond soon.</p>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                          <label className="text-sm font-medium text-slate-300 mb-2 block">
-                            Name *
-                          </label>
-                          <Input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                            placeholder="Your name"
-                            className="bg-slate-900 border-slate-700 text-white placeholder:text-slate-500 focus:border-teal-500"
-                          />
-                        </div>
-                        <div>
-                          <label className="text-sm font-medium text-slate-300 mb-2 block">
-                            Email *
-                          </label>
-                          <Input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                            placeholder="your.email@example.com"
-                            className="bg-slate-900 border-slate-700 text-white placeholder:text-slate-500 focus:border-teal-500"
-                          />
-                        </div>
-                      </div>
+              <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm overflow-hidden">
+                {/* Tab Switcher */}
+                <div className="border-b border-slate-700 grid grid-cols-2">
+                  <button
+                    onClick={() => setActiveTab('message')}
+                    data-testid="tab-send-message"
+                    className={`relative px-4 py-4 text-sm font-medium transition-all flex items-center justify-center gap-2 ${
+                      activeTab === 'message'
+                        ? 'text-white bg-slate-800/60'
+                        : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/30'
+                    }`}
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    <span>Send Message</span>
+                    {activeTab === 'message' && (
+                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-teal-400 to-emerald-400"></span>
+                    )}
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('call')}
+                    data-testid="tab-book-call"
+                    className={`relative px-4 py-4 text-sm font-medium transition-all flex items-center justify-center gap-2 ${
+                      activeTab === 'call'
+                        ? 'text-white bg-slate-800/60'
+                        : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/30'
+                    }`}
+                  >
+                    <Calendar className="w-4 h-4" />
+                    <span>Book a Call</span>
+                    {activeTab === 'call' && (
+                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-teal-400 to-emerald-400"></span>
+                    )}
+                  </button>
+                </div>
 
-                      <div>
-                        <label className="text-sm font-medium text-slate-300 mb-2 block">
-                          Subject *
-                        </label>
-                        <Input
-                          type="text"
-                          name="subject"
-                          value={formData.subject}
-                          onChange={handleChange}
-                          required
-                          placeholder="What's this about?"
-                          className="bg-slate-900 border-slate-700 text-white placeholder:text-slate-500 focus:border-teal-500"
-                        />
-                      </div>
-
-                      <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <label className="text-sm font-medium text-slate-300">
-                            Message *
-                          </label>
-                          <span className={`text-xs ${formData.message.trim().length < 10 ? 'text-amber-400' : 'text-slate-500'}`}>
-                            {formData.message.trim().length}/2000 {formData.message.trim().length < 10 && `(min 10)`}
-                          </span>
+                {/* Send Message Tab */}
+                {activeTab === 'message' && (
+                  <>
+                    <CardHeader>
+                      <CardTitle className="text-white">Send a Message</CardTitle>
+                      <CardDescription className="text-slate-400">
+                        Fill out the form and I'll get back to you within 24 hours
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      {isSubmitted ? (
+                        <div className="py-12 text-center">
+                          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-teal-500/20 to-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+                            <CheckCircle2 className="w-8 h-8 text-teal-400" />
+                          </div>
+                          <h3 className="text-xl font-semibold text-white mb-2">Message Sent!</h3>
+                          <p className="text-slate-400">Thank you for reaching out. I'll respond soon.</p>
                         </div>
-                        <Textarea
-                          name="message"
-                          value={formData.message}
-                          onChange={handleChange}
-                          required
-                          rows={5}
-                          maxLength={2000}
-                          placeholder="Tell me about your project or inquiry... (minimum 10 characters)"
-                          className="bg-slate-900 border-slate-700 text-white placeholder:text-slate-500 focus:border-teal-500 resize-none"
-                        />
-                      </div>
+                      ) : (
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                              <label className="text-sm font-medium text-slate-300 mb-2 block">
+                                Name *
+                              </label>
+                              <Input
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                                placeholder="Your name"
+                                className="bg-slate-900 border-slate-700 text-white placeholder:text-slate-500 focus:border-teal-500"
+                              />
+                            </div>
+                            <div>
+                              <label className="text-sm font-medium text-slate-300 mb-2 block">
+                                Email *
+                              </label>
+                              <Input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                                placeholder="your.email@example.com"
+                                className="bg-slate-900 border-slate-700 text-white placeholder:text-slate-500 focus:border-teal-500"
+                              />
+                            </div>
+                          </div>
 
-                      <Button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-full bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-medium py-6 group disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        {isSubmitting ? 'Sending...' : 'Send Message'}
-                        <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </Button>
-                    </form>
-                  )}
-                </CardContent>
+                          <div>
+                            <label className="text-sm font-medium text-slate-300 mb-2 block">
+                              Subject *
+                            </label>
+                            <Input
+                              type="text"
+                              name="subject"
+                              value={formData.subject}
+                              onChange={handleChange}
+                              required
+                              placeholder="What's this about?"
+                              className="bg-slate-900 border-slate-700 text-white placeholder:text-slate-500 focus:border-teal-500"
+                            />
+                          </div>
+
+                          <div>
+                            <div className="flex items-center justify-between mb-2">
+                              <label className="text-sm font-medium text-slate-300">
+                                Message *
+                              </label>
+                              <span className={`text-xs ${formData.message.trim().length < 10 ? 'text-amber-400' : 'text-slate-500'}`}>
+                                {formData.message.trim().length}/2000 {formData.message.trim().length < 10 && `(min 10)`}
+                              </span>
+                            </div>
+                            <Textarea
+                              name="message"
+                              value={formData.message}
+                              onChange={handleChange}
+                              required
+                              rows={5}
+                              maxLength={2000}
+                              placeholder="Tell me about your project or inquiry... (minimum 10 characters)"
+                              className="bg-slate-900 border-slate-700 text-white placeholder:text-slate-500 focus:border-teal-500 resize-none"
+                            />
+                          </div>
+
+                          <Button
+                            type="submit"
+                            disabled={isSubmitting}
+                            data-testid="send-message-submit"
+                            className="w-full bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-medium py-6 group disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            {isSubmitting ? 'Sending...' : 'Send Message'}
+                            <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          </Button>
+                        </form>
+                      )}
+                    </CardContent>
+                  </>
+                )}
+
+                {/* Book a Call Tab */}
+                {activeTab === 'call' && (
+                  <>
+                    <CardHeader>
+                      <CardTitle className="text-white">Schedule a Call</CardTitle>
+                      <CardDescription className="text-slate-400">
+                        Pick a time that works best for you — I&apos;ll meet you on video.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-center py-6">
+                        {/* Visual elements */}
+                        <div className="relative inline-block mb-6">
+                          <div className="absolute -inset-4 bg-gradient-to-r from-teal-500/20 to-emerald-500/20 rounded-full blur-2xl"></div>
+                          <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-teal-500/20 to-emerald-500/20 border border-teal-500/30 flex items-center justify-center">
+                            <Calendar className="w-10 h-10 text-teal-400" />
+                          </div>
+                        </div>
+
+                        <h3 className="text-2xl font-bold text-white mb-3">
+                          Let&apos;s Talk on a Quick Call
+                        </h3>
+                        <p className="text-slate-400 mb-6 max-w-md mx-auto leading-relaxed">
+                          Book a free 30-minute discovery call to discuss your automation needs, ideas, or any project you have in mind.
+                        </p>
+
+                        {/* Benefits grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8 max-w-lg mx-auto">
+                          <div className="flex flex-col items-center gap-2 p-3 rounded-lg bg-slate-900/40 border border-slate-700">
+                            <Clock className="w-5 h-5 text-teal-400" />
+                            <span className="text-xs text-slate-300">30 Minutes</span>
+                          </div>
+                          <div className="flex flex-col items-center gap-2 p-3 rounded-lg bg-slate-900/40 border border-slate-700">
+                            <Video className="w-5 h-5 text-teal-400" />
+                            <span className="text-xs text-slate-300">Video Call</span>
+                          </div>
+                          <div className="flex flex-col items-center gap-2 p-3 rounded-lg bg-slate-900/40 border border-slate-700">
+                            <CheckCircle2 className="w-5 h-5 text-teal-400" />
+                            <span className="text-xs text-slate-300">100% Free</span>
+                          </div>
+                        </div>
+
+                        {/* Calendly button */}
+                        <a
+                          href={calendly}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          data-testid="book-call-calendly"
+                          className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-medium px-8 py-4 rounded-lg transition-all duration-300 group shadow-lg shadow-teal-500/20"
+                        >
+                          <Calendar className="w-5 h-5" />
+                          <span>Book on Calendly</span>
+                          <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        </a>
+
+                        <p className="text-xs text-slate-500 mt-4">
+                          Opens calendly.com in a new tab
+                        </p>
+                      </div>
+                    </CardContent>
+                  </>
+                )}
               </Card>
             </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>

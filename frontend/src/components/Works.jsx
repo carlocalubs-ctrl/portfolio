@@ -3,6 +3,7 @@ import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { PlayCircle, X, ZoomIn, ArrowUpRight, Code2 } from 'lucide-react';
 import { portfolioData } from '../mockData';
+import { ScrollReveal } from '../hooks/useScrollReveal';
 
 export const Works = () => {
   const { projects } = portfolioData;
@@ -41,7 +42,8 @@ export const Works = () => {
     <section id="works" className="relative py-24 bg-slate-900/60 backdrop-blur-[2px] overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-4xl mx-auto mb-12">
+        <ScrollReveal>
+          <div className="max-w-4xl mx-auto mb-12">
           <div className="flex items-center gap-3 mb-4 justify-center">
             <span className="inline-block w-8 h-[2px] bg-teal-400"></span>
             <span className="text-teal-400 text-sm font-semibold uppercase tracking-widest">
@@ -60,9 +62,11 @@ export const Works = () => {
           <p className="text-lg text-slate-400 text-center max-w-2xl mx-auto">
             Real-world automation workflows I&apos;ve built and deployed for clients
           </p>
-        </div>
+          </div>
+        </ScrollReveal>
 
         {/* Category Filter Tabs */}
+        <ScrollReveal delay={100}>
         <div className="flex flex-wrap items-center justify-center gap-2 mb-16">
           {categories.map((cat) => (
             <button
@@ -79,14 +83,20 @@ export const Works = () => {
             </button>
           ))}
         </div>
+        </ScrollReveal>
 
         {/* Alternating Zigzag Layout */}
         <div className="max-w-7xl mx-auto space-y-20 sm:space-y-32">
           {filteredProjects.map((project, index) => {
             const isReversed = index % 2 === 1;
             return (
-              <div
+              <ScrollReveal
                 key={project.id}
+                delay={50}
+                direction={isReversed ? 'left' : 'right'}
+                distance={40}
+              >
+              <div
                 data-testid={`project-row-${project.id}`}
                 className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center ${
                   isReversed ? 'lg:[direction:rtl]' : ''
@@ -206,6 +216,7 @@ export const Works = () => {
                   </div>
                 </div>
               </div>
+              </ScrollReveal>
             );
           })}
 
@@ -255,13 +266,13 @@ export const Works = () => {
       {/* Video Modal */}
       {videoProject && (
         <div
-          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6"
           onClick={() => setVideoProject(null)}
           data-testid="video-modal-overlay"
         >
           <button
             onClick={() => setVideoProject(null)}
-            className="absolute top-4 right-4 sm:top-6 sm:right-6 w-11 h-11 rounded-full bg-slate-800 hover:bg-slate-700 border border-slate-700 flex items-center justify-center text-white transition-colors z-10"
+            className="absolute top-3 right-3 sm:top-5 sm:right-5 w-10 h-10 rounded-full bg-slate-800 hover:bg-slate-700 border border-slate-700 flex items-center justify-center text-white transition-colors z-20"
             data-testid="video-modal-close"
             aria-label="Close video"
           >
@@ -269,24 +280,27 @@ export const Works = () => {
           </button>
 
           <div
-            className="relative max-w-6xl w-full"
+            className="relative w-full h-full flex flex-col items-center justify-center max-w-6xl mx-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="bg-slate-900 rounded-lg overflow-hidden shadow-2xl border border-slate-700">
-              <video
-                src={videoProject.video}
-                controls
-                autoPlay
-                className="w-full h-auto max-h-[75vh] bg-black"
-                data-testid="video-player"
-              >
-                Your browser does not support the video tag.
-              </video>
-              <div className="p-5 border-t border-slate-800">
-                <h3 className="text-white text-xl font-semibold mb-1">
+            <div className="w-full max-h-full bg-slate-900 rounded-lg overflow-hidden shadow-2xl border border-slate-700 flex flex-col">
+              <div className="relative w-full bg-black flex items-center justify-center" style={{ maxHeight: 'calc(100vh - 180px)' }}>
+                <video
+                  src={videoProject.video}
+                  controls
+                  autoPlay
+                  playsInline
+                  className="w-full h-auto max-h-[calc(100vh-180px)] object-contain"
+                  data-testid="video-player"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div className="p-4 sm:p-5 border-t border-slate-800 flex-shrink-0">
+                <h3 className="text-white text-base sm:text-lg font-semibold mb-1 truncate">
                   {videoProject.title}
                 </h3>
-                <p className="text-slate-400 text-sm">{videoProject.category}</p>
+                <p className="text-slate-400 text-xs sm:text-sm">{videoProject.category}</p>
               </div>
             </div>
           </div>

@@ -8,6 +8,7 @@ export const portfolioData = {
   email: "carlocalubs@gmail.com",
   phone: "+639565229350",
   linkedin: "", // To be added later
+  calendly: "https://calendly.com/carlocalubs/30min",
   profileImage: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/tafkpjz1_wmremove-transformed.png",
   profileVideo: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/yp069pbn_download%20%282%29.mp4",
   
