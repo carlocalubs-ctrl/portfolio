@@ -137,70 +137,102 @@ export const Contact = () => {
           </div>
         </ScrollReveal>
 
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Contact Info */}
-            <ScrollReveal direction="right" delay={100}>
-            <div className="space-y-6">
-              <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="text-white">Contact Information</CardTitle>
-                  <CardDescription className="text-slate-400">
-                    Feel free to reach out through any channel
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-8 items-stretch">
+            {/* Contact Info — Takes 1/3 on desktop */}
+            <ScrollReveal direction="right" delay={100} className="lg:w-1/3 lg:flex-shrink-0">
+            <Card className="h-full bg-slate-800/50 border-slate-700 backdrop-blur-sm flex flex-col">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-white text-xl flex items-center gap-2">
+                  <span className="inline-block w-1.5 h-6 bg-gradient-to-b from-teal-400 to-emerald-400 rounded-full"></span>
+                  Contact Information
+                </CardTitle>
+                <CardDescription className="text-slate-400">
+                  Feel free to reach out through any channel
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex-1 flex flex-col space-y-4">
+                <a
+                  href={`mailto:${email}`}
+                  data-testid="contact-info-email"
+                  className="flex items-center gap-3 text-slate-300 hover:text-teal-400 transition-colors group p-3 -m-3 rounded-lg hover:bg-slate-900/30"
+                >
+                  <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-teal-500/20 to-emerald-500/20 border border-teal-500/20 flex items-center justify-center group-hover:from-teal-500/30 group-hover:to-emerald-500/30 group-hover:border-teal-400/40 transition-all flex-shrink-0">
+                    <Mail className="w-5 h-5 text-teal-400" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-xs text-slate-500 mb-0.5 uppercase tracking-wider">Email</div>
+                    <div className="text-sm font-medium truncate">{email}</div>
+                  </div>
+                </a>
+
+                <a
+                  href={`tel:${phone}`}
+                  data-testid="contact-info-phone"
+                  className="flex items-center gap-3 text-slate-300 hover:text-teal-400 transition-colors group p-3 -m-3 rounded-lg hover:bg-slate-900/30"
+                >
+                  <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-teal-500/20 to-emerald-500/20 border border-teal-500/20 flex items-center justify-center group-hover:from-teal-500/30 group-hover:to-emerald-500/30 group-hover:border-teal-400/40 transition-all flex-shrink-0">
+                    <Phone className="w-5 h-5 text-teal-400" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-xs text-slate-500 mb-0.5 uppercase tracking-wider">Phone</div>
+                    <div className="text-sm font-medium">{phone}</div>
+                  </div>
+                </a>
+
+                <a
+                  href={calendly}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid="contact-info-calendly"
+                  className="flex items-center gap-3 text-slate-300 hover:text-teal-400 transition-colors group p-3 -m-3 rounded-lg hover:bg-slate-900/30"
+                >
+                  <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-teal-500/20 to-emerald-500/20 border border-teal-500/20 flex items-center justify-center group-hover:from-teal-500/30 group-hover:to-emerald-500/30 group-hover:border-teal-400/40 transition-all flex-shrink-0">
+                    <Calendar className="w-5 h-5 text-teal-400" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-xs text-slate-500 mb-0.5 uppercase tracking-wider">Schedule</div>
+                    <div className="text-sm font-medium">Book a Free Call</div>
+                  </div>
+                </a>
+
+                {linkedin && (
                   <a
-                    href={`mailto:${email}`}
-                    className="flex items-center gap-3 text-slate-300 hover:text-teal-400 transition-colors group"
+                    href={linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-slate-300 hover:text-teal-400 transition-colors group p-3 -m-3 rounded-lg hover:bg-slate-900/30"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-teal-500/20 to-emerald-500/20 flex items-center justify-center group-hover:from-teal-500/30 group-hover:to-emerald-500/30 transition-all">
-                      <Mail className="w-5 h-5 text-teal-400" />
+                    <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-teal-500/20 to-emerald-500/20 border border-teal-500/20 flex items-center justify-center group-hover:from-teal-500/30 group-hover:to-emerald-500/30 group-hover:border-teal-400/40 transition-all flex-shrink-0">
+                      <Linkedin className="w-5 h-5 text-teal-400" />
                     </div>
-                    <div>
-                      <div className="text-xs text-slate-500 mb-1">Email</div>
-                      <div className="text-sm font-medium">{email}</div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-xs text-slate-500 mb-0.5 uppercase tracking-wider">LinkedIn</div>
+                      <div className="text-sm font-medium">Connect with me</div>
                     </div>
                   </a>
+                )}
 
-                  <a
-                    href={`tel:${phone}`}
-                    className="flex items-center gap-3 text-slate-300 hover:text-teal-400 transition-colors group"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-teal-500/20 to-emerald-500/20 flex items-center justify-center group-hover:from-teal-500/30 group-hover:to-emerald-500/30 transition-all">
-                      <Phone className="w-5 h-5 text-teal-400" />
-                    </div>
+                {/* Availability indicator at bottom */}
+                <div className="mt-auto pt-6 border-t border-slate-700/60">
+                  <div className="flex items-center gap-2.5">
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+                    </span>
                     <div>
-                      <div className="text-xs text-slate-500 mb-1">Phone</div>
-                      <div className="text-sm font-medium">{phone}</div>
+                      <div className="text-xs text-emerald-300 font-semibold">Available for Projects</div>
+                      <div className="text-xs text-slate-500">Usually responds within 24 hours</div>
                     </div>
-                  </a>
-
-                  {linkedin && (
-                    <a
-                      href={linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-slate-300 hover:text-teal-400 transition-colors group"
-                    >
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-teal-500/20 to-emerald-500/20 flex items-center justify-center group-hover:from-teal-500/30 group-hover:to-emerald-500/30 transition-all">
-                        <Linkedin className="w-5 h-5 text-teal-400" />
-                      </div>
-                      <div>
-                        <div className="text-xs text-slate-500 mb-1">LinkedIn</div>
-                        <div className="text-sm font-medium">Connect with me</div>
-                      </div>
-                    </a>
-                  )}
-                </CardContent>
-              </Card>
-            </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
             </ScrollReveal>
 
-            {/* Contact Form / Booking Tabs */}
-            <ScrollReveal direction="left" delay={200}>
-            <div className="lg:col-span-2">
-              <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm overflow-hidden">
+            {/* Contact Form / Booking Tabs — Takes 2/3 on desktop */}
+            <ScrollReveal direction="left" delay={200} className="lg:flex-1">
+            <Card className="h-full bg-slate-800/50 border-slate-700 backdrop-blur-sm overflow-hidden flex flex-col">
                 {/* Tab Switcher */}
                 <div className="border-b border-slate-700 grid grid-cols-2">
                   <button
@@ -400,7 +432,6 @@ export const Contact = () => {
                   </>
                 )}
               </Card>
-            </div>
             </ScrollReveal>
           </div>
         </div>

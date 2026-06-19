@@ -266,41 +266,46 @@ export const Works = () => {
       {/* Video Modal */}
       {videoProject && (
         <div
-          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6"
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md overflow-y-auto"
           onClick={() => setVideoProject(null)}
           data-testid="video-modal-overlay"
         >
+          {/* Sticky close button */}
           <button
             onClick={() => setVideoProject(null)}
-            className="absolute top-3 right-3 sm:top-5 sm:right-5 w-10 h-10 rounded-full bg-slate-800 hover:bg-slate-700 border border-slate-700 flex items-center justify-center text-white transition-colors z-20"
+            className="fixed top-3 right-3 sm:top-5 sm:right-5 w-11 h-11 rounded-full bg-slate-800 hover:bg-slate-700 border border-slate-700 flex items-center justify-center text-white transition-colors z-20 shadow-xl"
             data-testid="video-modal-close"
             aria-label="Close video"
           >
             <X className="w-5 h-5" />
           </button>
 
+          {/* Scrollable content wrapper - centers when small, scrolls when large */}
           <div
-            className="relative w-full h-full flex flex-col items-center justify-center max-w-6xl mx-auto"
+            className="min-h-full flex items-center justify-center p-3 sm:p-6 md:p-10"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-full max-h-full bg-slate-900 rounded-lg overflow-hidden shadow-2xl border border-slate-700 flex flex-col">
-              <div className="relative w-full bg-black flex items-center justify-center" style={{ maxHeight: 'calc(100vh - 180px)' }}>
+            <div className="w-full max-w-5xl bg-slate-900 rounded-lg overflow-hidden shadow-2xl border border-slate-700 my-auto">
+              <div className="relative w-full bg-black">
                 <video
                   src={videoProject.video}
                   controls
                   autoPlay
                   playsInline
-                  className="w-full h-auto max-h-[calc(100vh-180px)] object-contain"
+                  className="w-full h-auto block"
                   data-testid="video-player"
                 >
                   Your browser does not support the video tag.
                 </video>
               </div>
-              <div className="p-4 sm:p-5 border-t border-slate-800 flex-shrink-0">
-                <h3 className="text-white text-base sm:text-lg font-semibold mb-1 truncate">
+              <div className="p-4 sm:p-5 border-t border-slate-800">
+                <h3 className="text-white text-base sm:text-lg font-semibold mb-1">
                   {videoProject.title}
                 </h3>
                 <p className="text-slate-400 text-xs sm:text-sm">{videoProject.category}</p>
+                <p className="text-slate-500 text-xs mt-2 italic">
+                  Tip: Scroll up/down or press ESC to close
+                </p>
               </div>
             </div>
           </div>
