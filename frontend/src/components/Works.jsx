@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { PlayCircle, X, ZoomIn, ArrowUpRight, Code2 } from 'lucide-react';
@@ -228,10 +229,10 @@ export const Works = () => {
         </div>
       </div>
 
-      {/* Image Lightbox */}
-      {lightboxImage && (
+      {/* Image Lightbox - rendered in Portal to escape stacking contexts */}
+      {lightboxImage && createPortal(
         <div
-          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
+          className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
           onClick={() => setLightboxImage(null)}
           data-testid="lightbox-overlay"
         >
@@ -260,13 +261,14 @@ export const Works = () => {
               <p className="text-slate-400 text-sm">{lightboxImage.category}</p>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
-      {/* Video Modal */}
-      {videoProject && (
+      {/* Video Modal - rendered in Portal to escape stacking contexts */}
+      {videoProject && createPortal(
         <div
-          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md overflow-y-auto"
+          className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md overflow-y-auto"
           onClick={() => setVideoProject(null)}
           data-testid="video-modal-overlay"
         >
@@ -309,7 +311,8 @@ export const Works = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );
