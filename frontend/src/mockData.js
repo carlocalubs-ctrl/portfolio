@@ -113,15 +113,37 @@ export const portfolioData = {
     { name: "CRM Systems", level: 85, category: "Technical" }
   ],
 
-  // Previous Works - Placeholder for now
+  // Previous Works / Projects
   projects: [
     {
       id: 1,
-      title: "Project Coming Soon",
-      description: "Exciting project details will be added here",
-      category: "Automation",
-      technologies: ["To be updated"],
-      status: "placeholder"
+      title: "Auto Post Weather Status to SocMed and save to Gdrive",
+      description: "Automated workflow using n8n that fetches real-time weather data from AccuWeather, generates social media content via AI Agent (Google Gemini), creates images using Nano Banana via APIFree, and publishes to Facebook, Instagram, and Twitter while saving everything to Google Drive.",
+      category: "n8n Automation",
+      technologies: ["n8n", "Gemini AI", "AccuWeather", "Google Drive", "Social Media APIs"],
+      image: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/9090l9mz_Auto%20Post%20Weather%20Status%20to%20SocMed%20and%20save%20to%20Gdrive.jpg",
+      video: null,
+      status: "live"
+    },
+    {
+      id: 2,
+      title: "Gmail Integration & Document Processing",
+      description: "Make.com (formerly Integromat) automation that watches incoming emails, extracts attachments, uploads files to Google Drive, generates AI-powered responses, logs data to Google Sheets, and sends follow-up emails — all hands-free.",
+      category: "Make Automation",
+      technologies: ["Make.com", "Gmail", "Google Drive", "Google Sheets", "AI Processing"],
+      image: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/fczn6u31_make.jpg",
+      video: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/aqm61mbz_make.mp4",
+      status: "live"
+    },
+    {
+      id: 3,
+      title: "AI-Powered Content Distribution Pipeline",
+      description: "Zapier multi-step workflow that monitors Google Drive for new files, uses AI by Zapier to transcribe video/audio, analyzes content, then intelligently distributes posts to Instagram and LinkedIn with proper formatting and scheduling.",
+      category: "Zapier Automation",
+      technologies: ["Zapier", "AI by Zapier", "Google Drive", "Instagram", "LinkedIn"],
+      image: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/oormgy3h_zapier.jpg",
+      video: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/5plpsdy1_zapier.mp4",
+      status: "live"
     }
   ],
 
@@ -135,7 +157,9 @@ export const portfolioData = {
       content: "John Carlo is an exceptional team member with outstanding customer service skills. His dedication to learning AI automation and applying it to our QA processes has significantly improved our team's efficiency. A true asset to any organization.",
       rating: 5,
       avatar: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/2k7iim3c_MY%20PICTURE.jpg",
-      avatarPosition: "right center"
+      avatarPosition: "right center",
+      featured: true,
+      fullImage: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/2k7iim3c_MY%20PICTURE.jpg"
     },
     {
       id: 2,
