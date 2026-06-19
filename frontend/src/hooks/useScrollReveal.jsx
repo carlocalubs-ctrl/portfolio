@@ -38,7 +38,7 @@ export const useInView = (options = {}) => {
     return () => {
       observer.unobserve(element);
     };
-  }, []);
+  }, [options]);
 
   return [ref, isInView];
 };
