@@ -119,7 +119,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-slate-900">
+    <section id="contact" className="relative py-20 bg-slate-900/60 backdrop-blur-[2px]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">

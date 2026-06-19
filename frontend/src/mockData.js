@@ -54,6 +54,21 @@ export const portfolioData = {
   experience: [
     {
       id: 1,
+      title: "Freelancer - Customer Support & Automation Specialist",
+      company: "Upwork & Onlinejobs.ph",
+      client: "Various International Clients",
+      period: "2024 - Present",
+      description: "Providing freelance customer support and AI automation services to clients worldwide",
+      responsibilities: [
+        "Delivering top-tier customer support across multiple channels (email, chat, phone) for global clients",
+        "Building custom automation workflows using Zapier, n8n, Make, and Power Automate",
+        "Integrating APIs and CRM systems to streamline client business operations",
+        "Implementing AI-powered solutions to reduce manual workload and improve efficiency",
+        "Managing multiple client projects with strict deadlines and high quality standards"
+      ]
+    },
+    {
+      id: 2,
       title: "Business Process Associate - Care Representative and Upskill into Automation Specialist",
       company: "Tata Consultancy Services",
       client: "AGL Retailer AU",
@@ -71,7 +86,7 @@ export const portfolioData = {
       ]
     },
     {
-      id: 2,
+      id: 3,
       title: "Customer Service Representative",
       company: "Teleperformance",
       client: "UnitedHealthcare USA",
@@ -110,10 +125,20 @@ export const portfolioData = {
     }
   ],
 
-  // Testimonials - Random for now
+  // Testimonials
   testimonials: [
     {
       id: 1,
+      name: "Flora Mcgrath",
+      position: "AGL Contact Manager",
+      company: "AGL Retailer Australia",
+      content: "John Carlo is an exceptional team member with outstanding customer service skills. His dedication to learning AI automation and applying it to our QA processes has significantly improved our team's efficiency. A true asset to any organization.",
+      rating: 5,
+      avatar: "https://customer-assets.emergentagent.com/job_tcs-portfolio-pro/artifacts/2k7iim3c_MY%20PICTURE.jpg",
+      avatarPosition: "right center"
+    },
+    {
+      id: 2,
       name: "Sarah Mitchell",
       position: "Operations Manager",
       company: "TechFlow Solutions",
@@ -121,19 +146,11 @@ export const portfolioData = {
       rating: 5
     },
     {
-      id: 2,
+      id: 3,
       name: "Michael Chen",
       position: "Director of Customer Success",
       company: "Global Services Inc.",
       content: "Working with John was a game-changer. His customer service background combined with technical automation skills delivered outstanding results.",
-      rating: 5
-    },
-    {
-      id: 3,
-      name: "Emma Rodriguez",
-      position: "CTO",
-      company: "Innovation Labs",
-      content: "John's API integration work was flawless. He completed our complex CRM integration ahead of schedule and exceeded all expectations.",
       rating: 5
     }
   ]

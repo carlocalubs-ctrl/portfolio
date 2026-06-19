@@ -6,7 +6,7 @@ export const Testimonials = () => {
   const { testimonials } = portfolioData;
 
   return (
-    <section id="testimonials" className="py-20 bg-slate-950">
+    <section id="testimonials" className="relative py-20 bg-slate-950/60 backdrop-blur-[2px]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -46,10 +46,26 @@ export const Testimonials = () => {
                 </p>
 
                 {/* Author */}
-                <div className="border-t border-slate-700 pt-4">
-                  <div className="font-semibold text-white mb-1">{testimonial.name}</div>
-                  <div className="text-sm text-teal-400">{testimonial.position}</div>
-                  <div className="text-sm text-slate-500">{testimonial.company}</div>
+                <div className="border-t border-slate-700 pt-4 flex items-center gap-3">
+                  {testimonial.avatar ? (
+                    <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-teal-500/30 flex-shrink-0 bg-slate-700">
+                      <img
+                        src={testimonial.avatar}
+                        alt={testimonial.name}
+                        className="w-full h-full object-cover"
+                        style={{ objectPosition: testimonial.avatarPosition || 'center' }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500/30 to-emerald-500/30 flex items-center justify-center text-teal-300 font-semibold flex-shrink-0">
+                      {testimonial.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                    </div>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <div className="font-semibold text-white mb-0.5 truncate">{testimonial.name}</div>
+                    <div className="text-sm text-teal-400 truncate">{testimonial.position}</div>
+                    <div className="text-xs text-slate-500 truncate">{testimonial.company}</div>
+                  </div>
                 </div>
               </CardContent>
             </Card>

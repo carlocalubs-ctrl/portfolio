@@ -7,7 +7,7 @@ export const Works = () => {
   const { projects } = portfolioData;
 
   return (
-    <section id="works" className="py-20 bg-slate-900">
+    <section id="works" className="relative py-20 bg-slate-900/60 backdrop-blur-[2px]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
