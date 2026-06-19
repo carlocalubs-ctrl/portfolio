@@ -3,7 +3,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 import resend
 
-resend.api_key = os.environ.get("RESEND_API_KEY")
+resend.api_key = os.environ.get("re_WsT8Cufn_NusDmwUnfxETTe7pZ3dVxDR1")
 
 app = FastAPI()
 
